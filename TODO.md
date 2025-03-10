@@ -10,4 +10,4 @@
           > ticketHistory
             - <Who Did What at When>
           > Comments
-            > Attachemts
+            > Attachments

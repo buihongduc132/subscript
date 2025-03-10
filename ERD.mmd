@@ -7,10 +7,20 @@
 
 erDiagram
     Org[Organization] {
+        uuid id
+        timestampz created_at
+        timestampz updated_at
+        timestampz deleted_at
+        
         string name
     }
 
     P[Project] {
+        uuid id
+        timestampz created_at
+        timestampz updated_at
+        timestampz deleted_at
+        
         string name
         uuid orgId FK
         jsonb config
@@ -19,6 +29,11 @@ erDiagram
     Org 1--many(0) P: has
 
     Publish[PublishInfo] {
+        uuid id
+        timestampz created_at
+        timestampz updated_at
+        timestampz deleted_at
+        
         string token
         enum permission
         uuid projectId FK
@@ -27,6 +42,11 @@ erDiagram
     P 1--many(0) Publish: has
 
     T_S[TicketStage] {
+        uuid id
+        timestampz created_at
+        timestampz updated_at
+        timestampz deleted_at
+        
         uuid projectId FK
         string name "Defined | WIP | Done | Canceled"
         int order
@@ -35,11 +55,21 @@ erDiagram
     P 1--many(1) T_S: has
 
     User[User] {
+        uuid id
+        timestampz created_at
+        timestampz updated_at
+        timestampz deleted_at
+        
         string email
         string hash_pasword
     }
 
     T[Ticket] {
+        uuid id
+        timestampz created_at
+        timestampz updated_at
+        timestampz deleted_at
+        
         string name
         uuid stageId FK
         string description "Tokenized string"
@@ -51,6 +81,11 @@ erDiagram
     }
 
     T_D[TicketDependant] {
+        uuid id
+        timestampz created_at
+        timestampz updated_at
+        timestampz deleted_at
+        
         uuid ticketId FK
         uuid dependsOnTicketId FK
     }
@@ -64,12 +99,22 @@ erDiagram
     User 1--many(0) T: assigned
 
     C[Comment] {
+        uuid id
+        timestampz created_at
+        timestampz updated_at
+        timestampz deleted_at
+        
         string content "tokenized"
     }
 
     T 1--many(0) C: has
     
     A[Attachment] {
+        uuid id
+        timestampz created_at
+        timestampz updated_at
+        timestampz deleted_at
+        
         string attachment_location
         jsonb   metadata "Size / CreatedDate / UpdatedDate / Ext"
         uuid commentId FK
@@ -78,6 +123,11 @@ erDiagram
     A many(0)--1 C: belongs
 
     THist[TicketHistory] {
+        uuid id
+        timestampz created_at
+        timestampz updated_at
+        timestampz deleted_at
+        
         uuid userId FK
         uuid ticketId FK
         enum actionType
@@ -87,6 +137,11 @@ erDiagram
     T 1--many(1) THist: has
 
     RelUserOrg[REL_User-Org] {
+        uuid id
+        timestampz created_at
+        timestampz updated_at
+        timestampz deleted_at
+        
         uuid userId FK
         uuid orgId FK
     }
@@ -95,6 +150,11 @@ erDiagram
     Org 1--many(1) RelUserOrg: has
 
     RelUserProject[REL_User-Project] {
+        uuid id
+        timestampz created_at
+        timestampz updated_at
+        timestampz deleted_at
+        
         uuid userId FK
         uuid projectId FK
     }
