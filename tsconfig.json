@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "target": "ES6",
+    "paths": {
+      "@/*": [
+        "server/*"
+      ]
+    },
+    "baseUrl": ".",
+    "types": ["node", "jest"]
+  },
+  "include": [
+    "server/**/*"
+  ]
+}

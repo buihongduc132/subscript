@@ -8,23 +8,35 @@
     "heroku-postbuild": "cd server && npx knex migrate:latest",
     "client": "cd client && yarn start",
     "server": "cd server && nodemon server.js",
+    "dev:server": "cd server && tsx --watch server.ts",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "test": "cd server && jest",
     "test:watch": "cd server && jest --watch",
     "start": "cd server && node server.js"
   },
   "dependencies": {
+    "awilix": "^12.0.4",
+    "axios": "^1.8.2",
+    "bcrypt": "^5.1.1",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
+    "envalid": "^8.0.0",
     "express": "^4.16.4",
     "jest": "^24.9.0",
-    "knex": "^0.20.5",
+    "jsonwebtoken": "^9.0.2",
+    "knex": "2.5.1",
     "lodash": "^4.17.15",
-    "nodemon": "^2.0.2",
     "pg": "^7.14.0",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "winston": "^3.17.0",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
-    "concurrently": "^4.0.1"
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/node": "^22.13.10",
+    "concurrently": "^4.0.1",
+    "nodemon": "^2.0.2",
+    "tsx": "^4.19.3"
   }
 }
