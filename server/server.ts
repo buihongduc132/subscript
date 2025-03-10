@@ -6,6 +6,13 @@ export { app };
 
 (async () => {
   const logger = await container.resolve('logger');
+
+  if (ENV.NODE_ENV === 'dev') {
+    const knex = await container.resolve('knex');
+    await knex.raw('SELECT 1 + 1 as VALUE');
+    logger.info('DB authenticated');
+  }
+
   const port = ENV.PORT;
 
   // app.get('/', routes.getAllTodos);

@@ -2,17 +2,20 @@
   Update with your config settings.
   The test database and development database are by default the same.
   Knex also allows for easy switching between databases. 
-  But the .returning() method will only work for PostgreSQL, MSSQL, and Oracle databases.
+  But the .returning() method will only work for postgres, MSSQL, and Oracle databases.
 */
 require('dotenv').config();
-module.exports = {
-
+const env = process.env.NODE_ENV;
+const client = 'pg';
+const confMap = {
   test: {
-    client: 'postgresql',
+    client,
     connection: {
-      database: process.env.PGDATABASE,
-      user:     process.env.PGUSER,
-      password: process.env.PGPASSWORD
+      password: process.env.POSTGRES_PASSWORD,
+      user: process.env.POSTGRES_USER,
+      database: process.env.POSTGRES_DB,
+      host: process.env.POSTGRES_HOST,
+      port: process.env.POSTGRES_PORT,
     },
     pool: {
       min: 2,
@@ -23,12 +26,14 @@ module.exports = {
     }
   },
 
-  development: {
-    client: 'postgresql',
+  dev: {
+    client,
     connection: {
-      database: process.env.PGDATABASE,
-      user:     process.env.PGUSER,
-      password: process.env.PGPASSWORD
+      password: process.env.POSTGRES_PASSWORD,
+      user: process.env.POSTGRES_USER,
+      database: process.env.POSTGRES_DB,
+      host: process.env.POSTGRES_HOST,
+      port: process.env.POSTGRES_PORT,
     },
     pool: {
       min: 2,
@@ -40,11 +45,13 @@ module.exports = {
   },
 
   staging: {
-    client: 'postgresql',
+    client,
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      password: process.env.POSTGRES_PASSWORD,
+      user: process.env.POSTGRES_USER,
+      database: process.env.POSTGRES_DB,
+      host: process.env.POSTGRES_HOST,
+      port: process.env.POSTGRES_PORT,
     },
     pool: {
       min: 2,
@@ -55,9 +62,15 @@ module.exports = {
     }
   },
 
-  production: {
-    client: 'postgresql',
-    connection: process.env.DATABASE_URL,
+  prod: {
+    client,
+    connection: {
+      password: process.env.POSTGRES_PASSWORD,
+      user: process.env.POSTGRES_USER,
+      database: process.env.POSTGRES_DB,
+      host: process.env.POSTGRES_HOST,
+      port: process.env.POSTGRES_PORT,
+    },
     pool: {
       min: 2,
       max: 10
@@ -68,3 +81,8 @@ module.exports = {
   }
 
 };
+
+const conf = confMap[env];
+console.log(',,,conf', { conf, env });
+
+module.exports = conf;
