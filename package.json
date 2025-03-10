@@ -1,6 +1,9 @@
 {
   "name": "todo-backend-express-knex",
   "version": "1.0.0",
+  "engines": {
+    "node": "20"
+  },
   "scripts": {
     "heroku-postbuild": "cd server && npx knex migrate:latest",
     "client": "cd client && yarn start",
