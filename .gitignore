@@ -25,4 +25,4 @@ node_modules
 ./client/yarn-debug.log*
 ./client/yarn-error.log*
 
-./server/.env
+server/.env
