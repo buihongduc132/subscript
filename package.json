@@ -7,12 +7,14 @@
   "scripts": {
     "heroku-postbuild": "cd server && npx knex migrate:latest",
     "client": "cd client && yarn start",
-    "server": "cd server && nodemon server.js",
+    "server": "cd server && tsx server.ts",
     "dev:server": "cd server && tsx --watch server.ts",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "test": "cd server && jest",
     "test:watch": "cd server && jest --watch",
-    "start": "cd server && node server.js"
+    "start": "cd server && node server.js",
+    "migrate": "cd server && knex migrate:latest",
+    "migrate:make": "cd server && knex migrate:make"
   },
   "dependencies": {
     "awilix": "^12.0.4",
@@ -26,7 +28,7 @@
     "jsonwebtoken": "^9.0.2",
     "knex": "2.5.1",
     "lodash": "^4.17.15",
-    "pg": "^7.14.0",
+    "pg": "8.0.3",
     "supertest": "^4.0.2",
     "winston": "^3.17.0",
     "zod": "^3.24.2"
