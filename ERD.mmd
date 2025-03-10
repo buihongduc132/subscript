@@ -1,0 +1,104 @@
+%%{init: {'theme':'forest'}}%%
+
+%% uuid id
+%% timestampz created_at
+%% timestampz updated_at
+%% timestampz deleted_at
+
+erDiagram
+    Org[Organization] {
+        string name
+    }
+
+    P[Project] {
+        string name
+        uuid orgId FK
+        jsonb config
+    }
+
+    Org 1--many(0) P: has
+
+    Publish[PublishInfo] {
+        string token
+        enum permission
+        uuid projectId FK
+        uuid initialStageId FK
+    }
+    P 1--many(0) Publish: has
+
+    T_S[TicketStage] {
+        uuid projectId FK
+        string name "Defined | WIP | Done | Canceled"
+        int order
+        jsonb config    "Ticket hidden duration / Stage Threshold /, ..."
+    }
+    P 1--many(1) T_S: has
+
+    User[User] {
+        string email
+        string hash_pasword
+    }
+
+    T[Ticket] {
+        string name
+        uuid stageId FK
+        string description "Tokenized string"
+        timestampz deadline
+        float weight
+        uuid creatorId FK
+        uuid assignee FK
+        uuid parentTicket FK
+    }
+
+    T_D[TicketDependant] {
+        uuid ticketId FK
+        uuid dependsOnTicketId FK
+    }
+
+    T 1--zero or one T: parent
+    T 1--many(0) T_D: dependsOnTicketId
+    T 1--many(0) T_D: ticketId
+
+    T 1--1 T_S: belongs
+    User 1--many(0) T: creator
+    User 1--many(0) T: assigned
+
+    C[Comment] {
+        string content "tokenized"
+    }
+
+    T 1--many(0) C: has
+    
+    A[Attachment] {
+        string attachment_location
+        jsonb   metadata "Size / CreatedDate / UpdatedDate / Ext"
+        uuid commentId FK
+    }
+
+    A many(0)--1 C: belongs
+
+    THist[TicketHistory] {
+        uuid userId FK
+        uuid ticketId FK
+        enum actionType
+        string actionPayload
+    }
+
+    T 1--many(1) THist: has
+
+    RelUserOrg[REL_User-Org] {
+        uuid userId FK
+        uuid orgId FK
+    }
+
+    User 1--many(0) RelUserOrg: has
+    Org 1--many(1) RelUserOrg: has
+
+    RelUserProject[REL_User-Project] {
+        uuid userId FK
+        uuid projectId FK
+    }
+
+    User 1--many(0) RelUserProject: has
+    P 1--many(0) RelUserProject: has
+
