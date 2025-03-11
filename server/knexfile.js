@@ -26,7 +26,7 @@ const confMap = {
     }
   },
 
-  dev: {
+  development: {
     client,
     connection: {
       password: process.env.POSTGRES_PASSWORD,
@@ -62,7 +62,7 @@ const confMap = {
     }
   },
 
-  prod: {
+  production: {
     client,
     connection: {
       password: process.env.POSTGRES_PASSWORD,
