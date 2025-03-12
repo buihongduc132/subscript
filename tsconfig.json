@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
+    "lib": [
+      "ES2020",
+      "DOM"
+    ],
     "sourceMap": true,
     "esModuleInterop": true,
     "target": "ES6",
@@ -10,9 +14,12 @@
       ]
     },
     "baseUrl": ".",
-    "types": ["node", "jest"]
+    "types": [
+      "node",
+      "jest"
+    ]
   },
   "include": [
     "server/**/*"
-  ]
+, "jest.config.ts"  ]
 }

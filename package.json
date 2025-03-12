@@ -11,7 +11,8 @@
     "dev:server": "cd server && tsx watch --clear-screen=false server.ts",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "test": "cd server && jest",
-    "test:watch": "cd server && jest --watch",
+    "test:watch": "cd server && jest --watchAll",
+    "test:cov:watch": "cd server && jest --coverage --watchAll",
     "start": "cd server && node server.js",
     "migrate": "cd server && knex migrate:latest",
     "migrate:make": "cd server && knex migrate:make"
@@ -26,7 +27,7 @@
     "envalid": "^8.0.0",
     "express": "^4.16.4",
     "http-status-codes": "^2.3.0",
-    "jest": "^24.9.0",
+    "jest": "29",
     "jsonwebtoken": "^9.0.2",
     "knex": "2.5.1",
     "lodash": "^4.17.15",
@@ -36,12 +37,16 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
     "@types/express": "4.17.2",
+    "@types/jest": "^29.5.14",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/lodash": "^4.17.16",
     "@types/node": "^22.13.10",
     "concurrently": "^4.0.1",
     "nodemon": "^2.0.2",
-    "tsx": "^4.19.3"
+    "ts-jest": "^29.2.6",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
   }
 }
